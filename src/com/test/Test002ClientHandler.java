@@ -1,23 +1,23 @@
 package com.test;
 
-import java.util.Date;
-
 import org.apache.mina.core.service.IoHandler;
 import org.apache.mina.core.session.IdleStatus;
 import org.apache.mina.core.session.IoSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TimeServerHandler implements IoHandler {
-	private static final Logger logger = LoggerFactory.getLogger(TimeServerHandler.class); 
+public class Test002ClientHandler implements IoHandler {
+	private static final Logger logger = LoggerFactory.getLogger(Test002ClientHandler.class); 
 	@Override
 	public void sessionCreated(IoSession session) throws Exception {
-		logger.info("服务端与客户端创建连接...");
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public void sessionOpened(IoSession session) throws Exception {
-		logger.info("服务端与客户端连接打开...");
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override
@@ -29,32 +29,27 @@ public class TimeServerHandler implements IoHandler {
 	@Override
 	public void sessionIdle(IoSession session, IdleStatus status)
 			throws Exception {
-		logger.info( "IDLE " + session.getIdleCount( status ));  
+		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void exceptionCaught(IoSession session, Throwable cause)
 			throws Exception {
-		logger.error("服务端发送异常...", cause);
+		logger.error("客户端发生异常...", cause);
 	}
 
 	@Override
 	public void messageReceived(IoSession session, Object message)
 			throws Exception {
-		 String str = message.toString();  
-		 logger.info("服务端接收信息："+str);
-        if( str.trim().equalsIgnoreCase("quit") ) {  
-            session.close();  
-            return;  
-        }  
-        Date date = new Date();  
-        session.write( date.toString() );  
+		String msg = message.toString(); 
+		logger.info("客户端接收到的信息为：" + msg);
 	}
 
 	@Override
 	public void messageSent(IoSession session, Object message) throws Exception {
-		logger.info("服务端发送信息成功..."); 
+		// TODO Auto-generated method stub
+
 	}
 
 	@Override

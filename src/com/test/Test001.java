@@ -15,7 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 public class Test001 {
 
-	private static final int PORT = 9123;  
+	private static final int PORT = 3005;  
 	private static final Logger logger = LoggerFactory.getLogger(Test001.class); 
 	/**
 	 * @param args
@@ -26,14 +26,13 @@ public class Test001 {
 		PropertyConfigurator.configure( relativelyPath + "/config/log4j.properties" );
 		IoAcceptor acceptor=new NioSocketAcceptor();    
 		
-		acceptor.getFilterChain().addLast( "logger", new LoggingFilter() );  
+		//acceptor.getFilterChain().addLast( "logger", new LoggingFilter() );  
         acceptor.getFilterChain().addLast( "codec", new ProtocolCodecFilter( new TextLineCodecFactory( Charset.forName( "UTF-8" ))));  
        
         acceptor.setHandler(  new TimeServerHandler() );  
         acceptor.getSessionConfig().setReadBufferSize( 2048 );  
         acceptor.getSessionConfig().setIdleTime( IdleStatus.BOTH_IDLE, 10 );  
-        for(int i=0;i<100;i++)
-        logger.error("服务端启动异常....");
+
         try {
 			acceptor.bind(new InetSocketAddress(PORT));
 			logger.info("服务端启动成功...     端口号为：" + PORT);
